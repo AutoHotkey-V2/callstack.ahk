@@ -12,7 +12,7 @@
 /*
 Name: CallStack - Gets the current call stack
 
-Version 1.0.1
+Version 0.1.0
 
 Description:
 	Gets the current callstack, containing information like functionname, filename and linenumber of the function.
@@ -60,7 +60,8 @@ CallStack(deepness :=100, getContents := true) {
 		currStack := {}			
 		currStack.file := oEx.File
 		currStack.line := oEx.Line
-		currStack.function := (oExPrev.What = lvl-1 ? "[AUTO-EXECUTE]" :  oExPrev.What)
+		; currStack.function := (oExPrev.What = lvl-1 ? "[AUTO-EXECUTE]" :  oExPrev.What)
+		currStack.function := oExPrev.What
 		currStack.depth := deepness - A_Index
 		if (max < currStack.depth) {
 			max :=  currStack.depth
@@ -70,8 +71,13 @@ CallStack(deepness :=100, getContents := true) {
 		}
 		stack[lvl+1] := currStack
 	}
+	minDepth := 0
 	for key,value in stack {
-		stack[key].depth := max - stack[key].depth
+		stack[key].depth := max - stack[key].depth -1
+		if (minDepth > key) {
+			minDepth := key 
+		}
 	}
+	stack.delete(minDepth)
 	return stack
 }
