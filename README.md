@@ -8,7 +8,7 @@ Function to get the current callstack, containing information like functionname,
 
 In a terminal or command line navigated to your project/library folder:
 ```bash
-npm install callstack.ahk
+npm install git+https://github.com/AutoHotkey-V2/callstack.ahk.git
 ```
 
 ## Usage
@@ -16,7 +16,8 @@ npm install callstack.ahk
 Include `export.ahk` from the `callstack.ahk` folder into your project using standard AutoHotkey-include methods.
 
 ```autohotkey
-#include <callstack.ahk/export.ahk>
+#Include %A_ScriptDir%\..\node_modules
+#Include callstack.ahk\export.ahk
 
 foo()
 return
@@ -24,10 +25,10 @@ return
 foo(){
 	cs := CallStack()
 	# Print the current callstack
-	for level, obj in  CallStack() { 
+	for level, obj in  CallStack() {
 		if (A_Index > 1 )
 			str := str . " => "
-		str := str . obj.function	
+		str := str . obj.function
 	}
 	OutputDebug str
 }
