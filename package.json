@@ -1,0 +1,13 @@
+{
+	"name": "callstack.ahk",
+	"version": "1.0.0",
+	"description": "Get the current callstack, containing information like functionname, filename and linenumber of the function.",
+	"main": "export.ahk",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/AutoHotkey-V2/callstack.ahk.git"
+	},
+	"dependencies": {},
+	"author": "Johannes Kilian",
+	"license": "MIT"
+}
