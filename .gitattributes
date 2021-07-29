@@ -1,0 +1,18 @@
+# used to remove files/folders from deployment using `git archive`
+#
+# This effects those files/folders not being part of github releases (archive 
+# files to be downloaded from github)
+###############################################################################
+
+# git files
+.gitattributes export-ignore
+.gitignore export-ignore
+.gitmodules export-ignore
+
+# files/folders used for develop purposes
+_build export-ignore
+.vscode export-ignore
+*.code-workspace export-ignore
+
+# npm files
+package.json export-ignore

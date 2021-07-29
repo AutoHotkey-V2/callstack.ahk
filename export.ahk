@@ -9,29 +9,61 @@
 ; ===================================================================================
 
 /*
-Name: CallStack - Gets the current call stack
+Title: callstack.ahk
 
-Version 1.0.0
+(see https://img.shields.io/badge/Language-AutoHotkey2-red.svg)
 
-Description:
-	Gets the current callstack, containing information like functionname, filename and linenumber of the function.
-	A map is returned, containing map elements in range of 0 to -calldepth (negative numbers).
-	Index 0 contains the info about current function, whereas Index -1 contains info about the parent (caller)
-	of the current function. (-2: Grandparent ...)
+Authors:
+<hoppfrosch at hoppfrosch@gmx.de>: Original
+
+License:
+<MIT License: https://opensource.org/licenses/MIT> , (c) 2021, Johannes Kilian
+
+*/
+release_version() {
+	return "1.0.1"
+}
+/*
+Function: CallStack
+
+Gets the current callstack, containing information like functionname, filename and linenumber of the function.
 
 Example:
+=== Autohotkey ===========
+#Include node_modules\callstack.ahk\export.ahk
+
+foo()
+return
+
+foo(){
 	cs := CallStack()
 	# Print the current callstack
 	for level, obj in  CallStack() {
 		if (A_Index > 1 )
 			str := str . " => "
-		str := str . obj.function
+		str := str . obj.function ", line " obj.line
 	}
-	MsgBox str
+	OutputDebug str
+}
+===
 
-Parameter:
-	* deepness (optional, default := 100) - determines the depth of the determined callstack
-	* getContents (optional, default := true) - get the contents of the line, where the current function is called
+Parameters:
+	deepness - determines the depth of the determined callstack (optional, default := 100)
+	getContents - get the contents of the line, where the current function is called (optional, default := true)
+
+Returns:
+	A map is returned, containing map elements in range of 0 to -calldepth (negative numbers).
+
+	Index 0 contains the info about current function, whereas Index -1 contains info about the parent (caller)
+	of the current function. (-2: Grandparent ...).
+
+	Each map element has the following members:
+
+	res[index].function - Name of the function at current index
+	res[index].depth - Depth (distance from main/Auto-Execute) at current index
+	res[index].file - name of the file at current index
+	res[index].line - line number within file at current index
+	res[index].contents - contents of line number at current index
 */
 CallStack(deepness :=100, getContents := true) {
 	stack := Map()
@@ -59,7 +91,7 @@ CallStack(deepness :=100, getContents := true) {
 		currStack := {}
 		currStack.file := oEx.File
 		currStack.line := oEx.Line
-		; currStack.function := (oExPrev.What = lvl-1 ? "[AUTO-EXECUTE]" :  oExPrev.What)
+		; currStack.function := (oExPrev.What = lvl-1 ? "[Autohotkey.exe]" :  oExPrev.What)
 		currStack.function := oExPrev.What
 		currStack.depth := deepness - A_Index
 		if (max < currStack.depth) {

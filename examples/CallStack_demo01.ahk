@@ -36,7 +36,7 @@ foo5(){
 	for key, value in x { ; Show the callstack for foo5()
 		if (A_Index > 1 )
 			str := str . " => "
-		  str := str . value.function " (" value.depth ")"	
+		str := str . value.function ", line " value.line
 	}
 	OutputDebug str
 }

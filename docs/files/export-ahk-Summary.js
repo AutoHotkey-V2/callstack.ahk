@@ -1,0 +1,1 @@
+﻿NDFramePage.OnPageTitleLoaded("File:export.ahk","export.ahk");NDSummary.OnSummaryLoaded("File:export.ahk",[["AutoHotKey","AutoHotKey"]],[["Functions","Function"],["Groups","Group"],["Sections","Section"]],[[1,0,2,"callstack.ahk","callstack.ahk"],[2,0,1,"Functions","Functions"],[3,0,0,"CallStack","CallStack"]]);
