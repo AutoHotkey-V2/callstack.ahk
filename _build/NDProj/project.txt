@@ -9,7 +9,7 @@ Format: 2.2 (Development Release 3)
 # ------------------------------------------------------------------------
 
 Title: callstack.ahk
-Subtitle: Version 1.0.1
+Subtitle: Version 1.0.2
 
 Copyright: (_c_) 2021, Johannes Kilian, MIT License
 
